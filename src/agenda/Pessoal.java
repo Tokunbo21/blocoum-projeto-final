@@ -1,18 +1,53 @@
 package agenda;
+import java.util.*;
 
-public class Pessoal {
+public class Pessoal extends Contato {
+	Scanner in = new Scanner(System.in);
 	private int idade;
 	private String sexo;
 	private String redesocial;
-	
-	
-	public Pessoal(int idade, String sexo,String redesocial) {
-		//super();
+
+	public Pessoal(String nome, String sobrenome, String telefone, String email, String endereco, int idade, String sexo, String redesocial) {
+		super(nome, sobrenome, telefone, email, endereco);
 		this.idade = idade;
 		this.sexo = sexo;
 		this.redesocial = redesocial;
 	}
 
+	@Override
+	public void setContato(){
+
+	}
+	@Override
+	public void getContato(){
+		String nomeCompleto = nome + sobrenome;
+		
+		System.out.printf("Nome: %s\nTelefone: %s\nE-mail: %s\nEndere�o: "
+				+ "%s\nIdade: %d\nSexo: %s\nRede "
+				+ "Social: %s",nomeCompleto, telefone,email,endereco,idade,sexo,redesocial);
+	}
+	
+	public void verificaIdade() {
+		idade = in.nextInt();
+		while(idade<=0 || idade>110)
+		{
+			System.out.printf("\nIDADE INV�LIDA! Insira novamente!");
+			idade = in.nextInt();
+		}
+		setIdade(idade);
+	}
+	
+	public void verificaRS(String redesocial) {
+		int validaRS = redesocial.indexOf(".");
+		while(validaRS == -1) {
+			System.out.println("***********\nRede Social invalida, insira um site!\n***************");
+			redesocial = in.nextLine();
+			validaRS = redesocial.indexOf(".");
+		}
+		setRedesocial(redesocial);
+	}
+	
+	
 	public int getIdade() {
 		return idade;
 	}
